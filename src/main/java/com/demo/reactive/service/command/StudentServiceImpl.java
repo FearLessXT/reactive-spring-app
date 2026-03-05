@@ -30,8 +30,8 @@ public class StudentServiceImpl implements StudentService {
                 .map(studentEntity -> {
                     StudentDataResult result = new StudentDataResult();
                     result.setStudentId(studentEntity.getId());
-                    result.setFirstname(studentEntity.getFirstname());
-                    result.setLastname(studentEntity.getLastname());
+                    result.setFirstname(studentEntity.getFirstName());
+                    result.setLastname(studentEntity.getLastName());
                     result.setAge(studentEntity.getAge());
                     return result;
                 }).switchIfEmpty(Mono.error(new EntityNotFoundException("Student with id " + id + " not found")));

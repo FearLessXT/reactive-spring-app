@@ -38,7 +38,23 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Mono<CustomerDataResult> registerCustomer(RegisterCustomerParam param) {
-        return customerRepository.save(CustomerEntity.builder().firstName(param.getFirstName()).lastName(param.getLastName()).walletNumber(param.getWalletNumber()).gender(param.getGender()).build()).map(saveEntity -> CustomerDataResult.builder().message("Successfully Register").status("Success").build()).doOnSuccess(result -> log.info("Customer registered")).onErrorResume(e -> {
+        return customerRepository
+                .save(CustomerEntity
+                        .builder()
+                        .firstName(param.getFirstName())
+                        .lastName(param.getLastName())
+                        .walletNumber(param.getWalletNumber())
+                        .gender(param.getGender())
+                        .build())
+                .map(saveEntity ->
+                        CustomerDataResult
+                                .builder()
+                                .message("Successfully Register")
+                                .status("Success").
+                                build())
+                .doOnSuccess(result ->
+                        log.info("Customer registered"))
+                .onErrorResume(e -> {
             log.error("Registration failed for email {}: {}", param.getEmail(), e.getMessage());
             return Mono.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Registration failed. Please try again"));
         });

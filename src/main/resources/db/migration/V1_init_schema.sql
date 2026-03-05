@@ -14,3 +14,11 @@ CREATE TABLE customer (
                           selfie_photo VARCHAR(255),
                           pin VARCHAR(10)
 )
+
+CREATE TABLE users (
+    id SERIAL NOT NULL PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    age INTEGER,
+    email VARCHAR(255),
+)
